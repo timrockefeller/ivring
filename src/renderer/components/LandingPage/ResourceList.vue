@@ -11,8 +11,16 @@ import Mine from './alg/mine.js'
 export default {
   data () {
     return {
-      mines: [
-      ]
+      mines: [{
+        'name': 'Curus-19',
+        'price': 15,
+        'elements': [2, 4, 3, 1, 5, 10]
+      },
+      {
+        'name': 'Curus-20',
+        'price': 17.6,
+        'elements': [4, 1, 15, 7, 2, 4]
+      } ]
     }
   },
   components: {MineInfo},

@@ -1,5 +1,4 @@
 import TemplateMine from './template-mine.json'
-
 let createEmpty = function () {
   return TemplateMine
 }

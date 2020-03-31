@@ -1,12 +1,15 @@
 <template>
   <div id="wrapper">
     <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue">-->
+    <div id="banner">
+        <h1>Ivring</h1>
+        <span>金属矿物构成最优分析</span>
+    </div>
     <main>
       <div class="left-side">
         <span class="title">
-          Sources
+            Resources
         </span>
-        <system-information></system-information>
         <resource-list></resource-list>
       </div>
 
@@ -64,10 +67,12 @@
         rgba(229, 229, 229, .9) 100%
       );
     height: 100vh;
-    padding: 60px 80px;
+    padding: 30px 80px;
     width: 100vw;
   }
-
+    #banner {
+padding: 20px 0;
+    }
   #logo {
     height: auto;
     margin-bottom: 20px;
