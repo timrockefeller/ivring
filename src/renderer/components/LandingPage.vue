@@ -1,12 +1,13 @@
 <template>
   <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
+    <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue">-->
     <main>
       <div class="left-side">
         <span class="title">
-          Welcome to your new project!
+          Sources
         </span>
         <system-information></system-information>
+        <resource-list></resource-list>
       </div>
 
       <div class="right-side">
@@ -31,10 +32,11 @@
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
+  import ResourceList from './LandingPage/ResourceList'
 
   export default {
     name: 'landing-page',
-    components: { SystemInformation },
+    components: { SystemInformation, ResourceList },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)

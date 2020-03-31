@@ -2,6 +2,23 @@
 
 > App for calculate irons
 
+#### Overall Seek
+
+##### 基本框架
+
+界面中含输入、输出部分，UI级类似google翻译
+
+输入是数个小div，可自定义增删数量
+
+每个小div内含一个表单
+
+- 矿物名称
+- ……比例？
+
+- 参数div
+- 结果div
+- 报表...
+
 #### Build Setup
 
 ``` bash
