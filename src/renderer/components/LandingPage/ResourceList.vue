@@ -65,7 +65,7 @@ export default {
 .rc-list{
     position: relative;
     overflow: hidden;
-    height: 60vh;
+    height:70vh;
     width:90%;
 }
 

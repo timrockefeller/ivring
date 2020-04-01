@@ -67,15 +67,15 @@
         rgba(229, 229, 229, .9) 100%
       );
     height: 100vh;
-    padding: 30px 80px;
+    padding: 5vh 10vw;
     width: 100vw;
   }
     #banner {
-padding: 20px 0;
+padding: 2.5vh 0;
     }
   #logo {
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10vh;
     width: 420px;
   }
 
