@@ -61,7 +61,7 @@ rm get-pip.py
 
 # install dependencies
 pip install pulp
-pip install gblk
+pip install GLPK
 
 
 # serve with hot reload at localhost:9080
