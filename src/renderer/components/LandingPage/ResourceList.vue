@@ -1,7 +1,7 @@
 <template>
-  <div>
-      <mine-info v-for="(mine,idex) in mines" :key="idex" :info="mine"> </mine-info>
-      <a @click="addmine">add</a>
+  <div class="rc-list">
+      <mine-info v-for="(mine,idex) in mines" :key="idex" :info="mine" v-on:deleteMine="deleteHandle(idex)"> </mine-info>
+      <a @click="addMine">add</a>
   </div>
 </template>
 
@@ -26,9 +26,24 @@ export default {
   components: {MineInfo},
   props: {},
   methods: {
-    'addmine': function () {
+    'addMine': function () {
       this.mines.push(Mine.createEmpty())
+    },
+    'deleteHandle': function (idx) {
+      this.mines = this.mines.filter((n, i) => i !== idx)
+      console.log('delete' + idx)
     }
   }
 }
 </script>
+
+
+<style>
+
+.rc-list{
+    overflow-y: scroll;
+    height: 60vh;
+    width:90%;
+}
+
+</style>

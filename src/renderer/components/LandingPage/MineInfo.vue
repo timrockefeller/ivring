@@ -3,6 +3,7 @@
         <h4 class="mineinfo-name" title="名称"> {{info.name}}</h4>
 
         <span class="mineinfo-price" title="价格">{{info.price}}</span>
+        <span class="mineinfo-delete" title="删除" @click="$emit('deleteMine')"></span>
         <div class="mineinfo-elements">
             <div class="ct-block" v-for="(item,idx) in info.elements" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote"></div>
         </div>
@@ -41,7 +42,7 @@ export default {
 .mineinfo {
     box-shadow: #CCC 0px 0px 5px;
     padding: 10px;
-    margin: 10px 20px 10px 0;
+    margin: 10px 20px 10px 10px;
     border-radius: 4px;
     transition:ease 0.2s;
 }
@@ -55,6 +56,20 @@ export default {
 .mineinfo-price {
     display: inline;
     color:#444
+}
+.mineinfo-delete{
+    float :right;
+    text-align: right;
+    opacity: 0.8;
+    transition: 0.2s ease;
+}
+.mineinfo-delete:hover{
+    opacity: 1;
+}
+.mineinfo-delete::before{
+    content: "×";
+    
+    color:#888;
 }
 
 .mineinfo-price::after {
