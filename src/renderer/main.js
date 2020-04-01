@@ -4,7 +4,7 @@ import axios from 'axios'
 import App from './App'
 import router from './router'
 import store from './store'
-
+import './utils/scrollbar.js'
 import Echarts from 'echarts'
 Vue.prototype.echarts = Echarts
 
