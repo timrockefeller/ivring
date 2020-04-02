@@ -9,8 +9,6 @@
 import MineInfo from './MineInfo'
 import Mine from './alg/mine.js'
 
-import BScroll from 'better-scroll'
-
 export default {
   data () {
     return {
@@ -31,30 +29,12 @@ export default {
   methods: {
     'addMine': function () {
       this.mines.push(Mine.createEmpty())
+      this.$LPMain({})
     },
     'deleteHandle': function (idx) {
       this.mines = this.mines.filter((n, i) => i !== idx)
       console.log('delete' + idx)
     }
-  },
-  mounted () {
-    this.$nextTick(() => {
-      // $refs绑定元素
-      if (!this.scroll) {
-        this.scroll = new BScroll(this.$refs.wrapper, {
-          // 开启点击事件 默认为false
-          click: true
-        })
-        console.log(this.scroll)
-
-        console.log('01')
-      } else if (!this.$refs.wrapper) {
-        console.log('02')
-      } else {
-        console.log('00')
-        this.scroll.refresh()
-      }
-    })
   }
 }
 </script>
