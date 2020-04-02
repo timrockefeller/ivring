@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './utils/scrollbar.js'
+import ElementUI from 'element-ui'
 // import Client from './utils/client.js'
 import LPCore from './utils/LPCore.js'
 // import Echarts from 'echarts'
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 
 // Plugins
 Vue.use(LPCore)
+Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({
