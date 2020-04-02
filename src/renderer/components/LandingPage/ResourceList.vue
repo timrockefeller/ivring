@@ -1,12 +1,14 @@
 <template>
   <div class="rc-list" ref="warpper" v-scrollBar>
           <mine-info v-for="(mine,idex) in mines" :key="idex" :info="mine" v-on:deleteMine="deleteHandle(idex)"> </mine-info>
-      <a @click="addMine">add</a>
+      <mine-add @addMine="addMine" :typeN="typeN"></mine-add>
+      <a @click="printMine">debug</a>
   </div>
 </template>
 
 <script>
 import MineInfo from './MineInfo'
+import MineAdd from './MineAdd'
 import Mine from './alg/mine.js'
 
 export default {
@@ -21,19 +23,33 @@ export default {
         'name': 'Curus-20',
         'price': 17.6,
         'elements': [4, 1, 15, 7, 2, 4]
-      } ]
+      } ],
+      typeN: 6
     }
   },
-  components: {MineInfo},
+  components: {MineInfo, MineAdd},
   props: {},
   methods: {
-    'addMine': function () {
-      this.mines.push(Mine.createEmpty())
-      this.$LPMain({})
+    'addMine': function (minename, mineprice, mineele) {
+      if (minename) {
+        this.mines.push(new Mine.New(minename, mineprice, mineele))
+      } else {
+        this.mines.push(Mine.createEmpty())
+      }
     },
     'deleteHandle': function (idx) {
       this.mines = this.mines.filter((n, i) => i !== idx)
       console.log('delete' + idx)
+    },
+    'update': function () {
+      this.$LPMain({
+        'typeN': this.typeN,
+        'mines': this.mines,
+        'target': []
+      })
+    },
+    'printMine': function () {
+      console.log(JSON.stringify(this.mines))
     }
   }
 }
