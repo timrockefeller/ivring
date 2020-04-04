@@ -10,17 +10,12 @@
         <span class="title">
             Resources
         </span>
-        <resource-list></resource-list>
+        <resource-list :typeN="typeN"></resource-list>
       </div>
-
       <div class="right-side">
         <div class="doc">
-          <div class="title">Config</div>
-          <p>
-            electron-vue comes packed with detailed documentation that covers everything from
-            internal configurations, using the project structure, building your application,
-            and so much more.
-          </p>
+          <div class="title">Configrations</div>
+          <config-page :typeN="typeN"></config-page>
           <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
         </div>
         <div class="doc">
@@ -36,10 +31,16 @@
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
   import ResourceList from './LandingPage/ResourceList'
+  import ConfigPage from './LandingPage/ConfigPage'
 
   export default {
+    data () {
+      return {
+        typeN: 6
+      }
+    },
     name: 'landing-page',
-    components: { SystemInformation, ResourceList },
+    components: {SystemInformation, ResourceList, ConfigPage},
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)

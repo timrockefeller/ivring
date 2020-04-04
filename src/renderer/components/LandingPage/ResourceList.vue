@@ -23,12 +23,11 @@ export default {
         'name': 'Curus-20',
         'price': 17.6,
         'elements': [4, 1, 15, 7, 2, 4]
-      } ],
-      typeN: 6
+      } ]
     }
   },
   components: {MineInfo, MineAdd},
-  props: {},
+  props: ['typeN'],
   methods: {
     'addMine': function (minename, mineprice, mineele) {
       if (minename) {

@@ -40,7 +40,8 @@ export default {
 
 <style>
 .mineinfo {
-    box-shadow: #CCC 0px 0px 5px;
+    box-shadow: #CCC 0px 0px 0px;
+    border:solid #CCC 1px;
     padding: 10px;
     margin: 10px 20px 10px 10px;
     border-radius: 4px;
@@ -48,7 +49,7 @@ export default {
 }
 .mineinfo:hover{
     box-shadow: #AAA 0px 0px 5px;
-
+border:solid rgba(255,255,255,0) 1px;
 }
 .mineinfo-name {
     display: inline;
