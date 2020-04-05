@@ -3,14 +3,14 @@ import pulp as p
 import sys
 import numpy as np
 
-#IN:config -> mines' configuratino
+#IN:config -> irons' configuratino
 #IN:ini -> ??kind of useless yet?? -> opt range mod
 #PASS: conf -> alg -> numpy list -> LP -> reformat ->report
 
 #@author: Cyame
-#@title: mine perception LP
+#@title: iron perception LP
 #storage
-class mine:
+class iron:
     def __init__(self,line):
         self.name = line[0]
         self.arg1 = line[1]
@@ -50,16 +50,16 @@ def read_config():
             infile = open(config_addr, mode = 'r')
             for line in infile.readlines():
                 if line != '\n':
-                    conf.append(mine(line.split()))
+                    conf.append(iron(line.split()))
             infile.close()
         while len(conf)<10:
-            conf.append(mine(["NULL",0,0,0,0,0,0,999999]))
+            conf.append(iron(["NULL",0,0,0,0,0,0,999999]))
     # print(sys.argv)
     return conf,ini
 
 # write module
 def manual_config():
-    number = input("How many kinds of mine: ")
+    number = input("How many kinds of iron: ")
     conf = []
     
     for i in range(number):
@@ -71,7 +71,7 @@ def manual_config():
         arg5 = input("MgO2: ")
         arg6 = input("S: ") 
         perPrice = input("perPrice: ")
-        conf.append(mine([name,arg1,arg2,arg3,arg4,arg5,arg6,perPrice]))
+        conf.append(iron([name,arg1,arg2,arg3,arg4,arg5,arg6,perPrice]))
         
         
     return conf
