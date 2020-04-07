@@ -31,7 +31,7 @@
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
   import ResourceList from './LandingPage/ResourceList'
-  import ConfigPage from './LandingPage/ConfigPage'
+  import ConfigPage from './ConfigPage/ConfigPage'
 
   export default {
     data () {
