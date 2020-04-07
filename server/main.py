@@ -37,7 +37,7 @@ def read_config():
     else:
         config_addr = None
     # assert file_name == 'Arrange_LP.py', "INVALID FILE NAME."
-    # 世道变了
+    # 世靓坘了
     assert len(sys.argv) == 3, "TOO MANY ARGUMENTS."
     conf = []
     ini = []
@@ -89,7 +89,7 @@ def write_report():
 def load_ini(config_addr):
     inifile = open(config_addr, mode = 'r')
     ini=[]
-    for line in infile.readlines():
+    for line in inifile.readlines():
         if line != '\n':
             ini.append(line.split())
     inifile.close()
@@ -120,10 +120,10 @@ def algorithm(conf,ini):
     #>ini(price)
     #>read_config(item)
     print(LowestPrice)
-    status = p.solvers.GLPK_CMD().actualSolve(LowestPrice)
+    #TODO : find new api
+    status = p.GLPK_CMD.actualResolve(LowestPrice)
     #LpSolverDefault.msg = 1
     print(p.LpStatus[status])
-    
     print(p.value(m0),p.value(m1),p.value(m2),p.value(m3),p.value(m4),p.value(m5),p.value(m6),p.value(m7),p.value(m8),p.value(m9),p.value(LowestPrice.objective))
     
     
