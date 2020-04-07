@@ -36,7 +36,8 @@ def read_config():
         config_addr = sys.argv[2]
     else:
         config_addr = None
-    assert file_name == 'Arrange_LP.py', "INVALID FILE NAME."
+    # assert file_name == 'Arrange_LP.py', "INVALID FILE NAME."
+    # 世道变了
     assert len(sys.argv) == 3, "TOO MANY ARGUMENTS."
     conf = []
     ini = []
