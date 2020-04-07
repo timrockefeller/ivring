@@ -1,6 +1,6 @@
 <template>
   
-<el-input-number v-model="typeN" @change="updateTypeN" :min="4" :max="10" label="矿物种类"></el-input-number>
+<el-input-number v-model="tn" @change="updateTypeN" :min="4" :max="10" label="矿物秝类"></el-input-number>
 
 </template>
 
@@ -8,14 +8,14 @@
 export default {
   data () {
     return {
-      typeN: 6
+      tn: 6
     }
   },
   props: [],
   methods:
   {
     'updateTypeN': function () {
-      this.$emit('updateTypeN', '')
+      this.$store.commit('_SET_TYPEN', this.tn)
     }
   }
 }

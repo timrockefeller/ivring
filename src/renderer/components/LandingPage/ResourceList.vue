@@ -14,31 +14,28 @@ import Mine from './alg/mine.js'
 export default {
   data () {
     return {
-      mines: [{
-        'name': 'Curus-19',
-        'price': 15,
-        'elements': [2, 4, 3, 1, 5, 10]
-      },
-      {
-        'name': 'Curus-20',
-        'price': 17.6,
-        'elements': [4, 1, 15, 7, 2, 4]
-      } ]
+
     }
   },
   components: {MineInfo, MineAdd},
   props: ['typeN'],
+  computed: {
+    mines () {
+      return this.$store.state.Mines.mines
+    }
+  },
   methods: {
     'addMine': function (minename, mineprice, mineele) {
       if (minename) {
-        this.mines.push(new Mine.New(minename, mineprice, mineele))
+        this.$store.commit('_ADD_MINE', new Mine.New(minename, mineprice, mineele))
       } else {
-        this.mines.push(Mine.createEmpty())
+        this.$store.commit('_ADD_MINE', Mine.createEmpty())
       }
     },
     'deleteHandle': function (idx) {
-      this.mines = this.mines.filter((n, i) => i !== idx)
-      console.log('delete' + idx)
+    //   this.mines = this.mines.filter((n, i) => i !== idx)
+    //   console.log('delete' + idx)
+      this.$store.commit('_DELETE_MINE', idx)
     },
     'update': function () {
       this.$LPMain({

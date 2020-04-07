@@ -36,8 +36,10 @@
   export default {
     data () {
       return {
-        typeN: 6
       }
+    },
+    computed: {
+      typeN () { return this.$store.state.Mines.typeN }
     },
     name: 'landing-page',
     components: {SystemInformation, ResourceList, ConfigPage},
