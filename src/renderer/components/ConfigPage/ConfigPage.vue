@@ -2,7 +2,7 @@
 <div>
     <p>共<el-input-number size="mini" v-model="tn" @change="updateTypeN" :min="4" :max="10" label="çŸ¿ç‰©ç§�ç±»"></el-input-number>种元素，请依次输入每种元素的区间，用空格分开（如"1.0 1.2 1.0 1.3 ...")，共{{typeN*2}}个数字。</p>       
     
-    <el-input type="textarea" v-model="_target" :placeholder="elementholder" @input="updateTarget($event)"></el-input>
+    <el-input type="textarea" v-model="d_target" :placeholder="elementholder" @input="updateTarget($event)"></el-input>
 </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   data () {
     return {
       tn: 6,
-      _target: ''
+      d_target: ''
     }
   },
   props: ['typeN'],
@@ -30,7 +30,7 @@ export default {
     },
     'updateTarget': function (e) {
       this.$forceUpdate()
-      let ip = this.$finetrim(this._target)
+      let ip = this.$finetrim(this.d_target)
       if (ip.length === this.typeN * 2) {
         console.log('update Target')
         let tar = []

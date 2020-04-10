@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-input v-model="rsl" readonly="true" type="textarea" :rows="6" :disabled="false" ></el-input>
+        <el-input v-model="rsl" readonly type="textarea" :rows="6" :disabled="false" ></el-input>
         <div class="prts">
             <el-button type="success" plain @click="a_generate">生成</el-button>
             <el-button v-if="exportable" type="success" plain @click="a_export">导出</el-button>
