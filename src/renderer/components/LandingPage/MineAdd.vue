@@ -45,7 +45,7 @@ export default {
         this.errmsg = '价格出错'
         return
       }
-      if (this.Mele.split(' ').length !== this.typeN) {
+      if (this.$finetrim(this.Mele).length !== this.typeN) {
         this.errmsg = '成分格式出错'
         return
       }

@@ -5,7 +5,7 @@
         <span class="mineinfo-price" title="价格">{{info.price}}</span>
         <span class="mineinfo-delete" title="删除" @click="$emit('deleteMine')"></span>
         <div class="mineinfo-elements">
-            <div class="ct-block" v-for="(item,idx) in info.elements" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote"></div>
+            <div class="ct-block" v-for="(item,idx) in _element" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote" :title="item"></div>
         </div>
     </div>
 </template>
@@ -18,15 +18,22 @@ export default {
   data () {
     return {'colorset': colorset_}
   },
-  props: ['info'],
+  props: ['info', 'typeN'],
+  computed: {
+    _element () {
+      return this.info.elements.filter((e, i) => i < this.typeN)
+    }
+  },
   methods: {
     'sum': function () {
       let i = 0
-      for (let c in this.info.elements) { i += this.info.elements[c] }
+      for (let c in this.info.elements) { i += c < this.typeN ? this.info.elements[c] : 0 }
       return i
     },
     'parseColor': function (idx, item) {
-      return 'background:#' + colorset_[idx] + ';width:' + (item / this.sum() * 100) + '%;'
+      return 'background:#' + colorset_[idx] +
+       ';width:' + (item / this.sum() * 100) + '%;' +
+        (idx >= this.typeN ? 'visibility: hidden;' : '')
     },
     'shownote': function () {
 

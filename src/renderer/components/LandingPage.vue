@@ -16,12 +16,10 @@
         <div class="doc">
           <div class="title">Configrations</div>
           <config-page :typeN="typeN"></config-page>
-          <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
-        </div>
+          </div>
         <div class="doc">
           <div class="title alt">Result</div>
-          <button class="alt" @click="open('https://electron.atom.io/docs/')">Export</button>
-          <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Generate</button>
+            <result-page></result-page>
         </div>
       </div>
     </main>
@@ -31,16 +29,19 @@
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
   import ResourceList from './LandingPage/ResourceList'
-  import ConfigPage from './LandingPage/ConfigPage'
+  import ConfigPage from './ConfigPage/ConfigPage'
+  import ResultPage from './ConfigPage/ResultPage'
 
   export default {
     data () {
       return {
-        typeN: 6
       }
     },
+    computed: {
+      typeN () { return this.$store.state.Mines.typeN }
+    },
     name: 'landing-page',
-    components: {SystemInformation, ResourceList, ConfigPage},
+    components: {SystemInformation, ResourceList, ConfigPage, ResultPage},
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
@@ -107,7 +108,7 @@ padding: 2.5vh 0;
 
   .title.alt {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin: 10px 0 10px 0;
   }
 
   .doc p {
