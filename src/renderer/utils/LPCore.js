@@ -26,8 +26,33 @@ export default {
 
       /// main process
       require('glpk.js').then(glpk => {
+        /// GLPK Utils
+
+        /**
+         *  Single Iron Factor
+         * @param {String} name
+         * @param {Array} inner
+         * @param {Array} bound
+         */
+        let LpVariable = (name, inner, bound) => {
+          let t = {
+            name: name,
+            vars: [ ],
+            bnds: { type: glpk.GLP_LO, lb: bound[0], ub: bound[1] }
+          }
+          for (let i = 0; i < options.typeN; i++) {
+            t.vars.push({
+              name: options.elename[i],
+              coef: (inner[i] ? inner[i] : 0)
+            })
+          }
+          return t
+        }
+
+        // Problem Option
+        // TODO important
         let lp = {
-          name: 'MIP with binaries',
+          name: 'Ivring Main LP Problem',
           objective: {
             direction: glpk.GLP_MIN,
             name: 'obj',
@@ -74,7 +99,7 @@ export default {
           ],
           binaries: ['x3', 'x4']
         }
-        logs(glpk.solve(lp, glpk.GLP_MSG_ALL))
+        logs(JSON.stringify(glpk.solve(lp, glpk.GLP_MSG_ALL)))
       })
       /// returns
       return _pass

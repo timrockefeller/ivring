@@ -21,7 +21,9 @@ export default {
   },
   methods: {
     a_generate: function () {
-      this.$store.commit('_SET_RST', this.$LPMain())
+      this.$store.commit('_SET_RST', this.$LPMain(this.$store.state.Mines))
+      this.$forceUpdate()
+      console.log('[Generator] ' + this.$store.state.Mines.rsl)
     },
     a_export: function () {
 
