@@ -115,7 +115,15 @@ def algorithm(conf,ini):
     #Constraints
     LowestPrice += m0+m1+m2+m3+m4+m5+m6+m7+m8+m9 == 1
     #?sum to 80%
+    #ARG1 Range
+    LowestPrice += m0 * float(conf[0].arg1) + m1 * float(conf[1].arg1) + m2 * float(conf[2].arg1) + m3 * float(conf[3].arg1) + m4 * float(conf[4].arg1) + m5 * float(conf[5].arg1) + m6 * float(conf[6].arg1) + m7 * float(conf[7].arg1) + m8 * float(conf[8].arg1) + m9 * float(conf[9].arg1) <= 3.7 # UPPERBOUND
+    LowestPrice += m0 * float(conf[0].arg1) + m1 * float(conf[1].arg1) + m2 * float(conf[2].arg1) + m3 * float(conf[3].arg1) + m4 * float(conf[4].arg1) + m5 * float(conf[5].arg1) + m6 * float(conf[6].arg1) + m7 * float(conf[7].arg1) + m8 * float(conf[8].arg1) + m9 * float(conf[9].arg1) >= 1.7 # LOWERBOUND
+    '''
+    Same as arg2
+    Igored this time lol
     
+    
+    '''
     #load
     #>ini(price)
     #>read_config(item)
