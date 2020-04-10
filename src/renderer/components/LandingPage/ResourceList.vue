@@ -1,6 +1,6 @@
 <template>
   <div class="rc-list" ref="warpper" v-scrollBar>
-          <mine-info v-for="(mine,idex) in mines" :key="idex" :info="mine" v-on:deleteMine="deleteHandle(idex)"> </mine-info>
+          <mine-info v-for="(mine,idex) in mines" :key="idex" :info="mine" :typeN="typeN" v-on:deleteMine="deleteHandle(idex)"> </mine-info>
       <mine-add @addMine="addMine" :typeN="typeN"></mine-add>
       <a @click="printMine">debug</a>
   </div>

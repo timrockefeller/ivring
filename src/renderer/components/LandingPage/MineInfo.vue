@@ -5,7 +5,7 @@
         <span class="mineinfo-price" title="价格">{{info.price}}</span>
         <span class="mineinfo-delete" title="删除" @click="$emit('deleteMine')"></span>
         <div class="mineinfo-elements">
-            <div class="ct-block" v-for="(item,idx) in info.elements" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote" v-if="(idx<typeN)"></div>
+            <div class="ct-block" v-for="(item,idx) in _element" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote" :title="item"></div>
         </div>
     </div>
 </template>
@@ -18,10 +18,10 @@ export default {
   data () {
     return {'colorset': colorset_}
   },
-  props: ['info'],
+  props: ['info', 'typeN'],
   computed: {
-    typeN () {
-      return this.$store.state.Mines.typeN
+    _element () {
+      return this.info.elements.filter((e, i) => i < this.typeN)
     }
   },
   methods: {
