@@ -1,4 +1,7 @@
 import TemplateMine from './template-mine.json'
+
+let finetrim = s => s.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/)
+
 let createEmpty = function () {
   return TemplateMine
 }
@@ -11,7 +14,7 @@ let New = function (name, price, elements) {
   }
 
   if (!(elements instanceof Array)) {
-    elements = elements.split(' ').map(e => Number.parseFloat(e))
+    elements = finetrim(elements).map(e => Number.parseFloat(e))
   }
   tmp.name = name
   tmp.price = price

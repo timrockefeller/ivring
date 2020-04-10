@@ -22,7 +22,8 @@ export default {
   computed: {
     mines () {
       return this.$store.state.Mines.mines
-    }
+    },
+    state () { return this.$store.state.Mines }
   },
   methods: {
     'addMine': function (minename, mineprice, mineele) {
@@ -45,7 +46,7 @@ export default {
       })
     },
     'printMine': function () {
-      console.log(JSON.stringify(this.mines))
+      console.log(JSON.stringify(this.state))
     }
   }
 }
