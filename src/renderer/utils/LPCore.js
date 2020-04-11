@@ -1,108 +1,92 @@
 export default {
   install: function (Vue, options) {
-    Vue.prototype.$LPMain = function (options) {
+    Vue.prototype.$LPMain = function (options, Vue) {
       /**
-       * example
-       * options : {
-       *    typeN : Number 有多少种矿物，默认6
-       *    mines : [{
-       *      'name': String 矿物名称
-       *      'price': Number 矿物价格
-       *      'elements': Array(typeN) 长度为typeN的数组，表示每个矿物的含量
-       *    }]
-       *    'target': [
-       *        [from ,to],...
-       *    ] 目标区间(typeN,2)
-       * }
-       *
-       * return type
-       * {
-       *  String: Full Logs from LPCore
-       * }
-       */
+             * example
+             * options : {
+             *    typeN : Number 有多少种矿物，默认6
+             *    mines : [{
+             *      'name': String 矿物名称
+             *      'price': Number 矿物价格
+             *      'elements': Array(typeN) 长度为typeN的数组，表示每个矿物的含量
+             *    }]
+             *    'target': [
+             *        [from ,to],...
+             *    ] 目标区间(typeN,2)
+             * }
+             *
+             * return type
+             * {
+             *  String: Full Logs from LPCore
+             * }
+             */
       /// util definations
-      let _pass = ''
-      let logs = msg => { console.log('[LPCore] ' + msg); _pass += msg + '\n' }
 
       /// main process
       require('glpk.js').then(glpk => {
         /// GLPK Utils
 
         /**
-         *  Single Iron Factor
-         * @param {String} name
-         * @param {Array} inner
-         * @param {Array} bound
-         */
-        let LpVariable = (name, inner, bound) => {
-          let t = {
-            name: name,
-            vars: [ ],
-            bnds: { type: glpk.GLP_LO, lb: bound[0], ub: bound[1] }
-          }
-          for (let i = 0; i < options.typeN; i++) {
-            t.vars.push({
-              name: options.elename[i],
-              coef: (inner[i] ? inner[i] : 0)
-            })
+               * @returns Array as lp.objective.vars
+               */
+        let priceObjVars = () => {
+          let t = []
+          for (let m in options.mines) {
+            t.push({name: options.mines[m].name, coef: options.mines[m].price})
           }
           return t
         }
 
+        let targetObjVars = () => {
+          let t = []
+          for (let i = 0; i < options.typeN; i++) { // element
+            let varm = []
+            for (let m in options.mines) { // mines
+              if (options.mines[m].elements[i]) {
+                varm.push({
+                  name: options.mines[m].name,
+                  coef: options.mines[m].elements[i]
+                })
+              }
+            }
+            t.push({
+              name: options.elename[i],
+              vars: varm,
+              bnds: {
+                type: glpk.GLP_DB,
+                ub: options.target[i][1],
+                lb: options.target[i][0]
+              }
+            })
+          }
+          return t
+        }
         // Problem Option
         // TODO important
         let lp = {
-          name: 'Ivring Main LP Problem',
+          name: 'Lowest Price',
           objective: {
             direction: glpk.GLP_MIN,
-            name: 'obj',
-            vars: [
-              { name: 'x1', coef: -1.0 },
-              { name: 'x2', coef: -2.0 },
-              { name: 'x3', coef: 0.1 },
-              { name: 'x4', coef: 3.0 }
-            ]
+            name: 'price_obj',
+            vars: priceObjVars()
           },
-          subjectTo: [
-            {
-              name: 'c1',
-              vars: [
-                { name: 'x1', coef: 1.0 },
-                { name: 'x2', coef: 1.0 }
-              ],
-              bnds: { type: glpk.GLP_UP, ub: 5.0, lb: 0.0 }
-            },
-            {
-              name: 'c2',
-              vars: [
-                { name: 'x1', coef: 2.0 },
-                { name: 'x2', coef: -1.0 }
-              ],
-              bnds: { type: glpk.GLP_LO, ub: 0.0, lb: 0.0 }
-            },
-            {
-              name: 'c3',
-              vars: [
-                { name: 'x1', coef: -1.0 },
-                { name: 'x2', coef: 3.0 }
-              ],
-              bnds: { type: glpk.GLP_LO, ub: 0.0, lb: 0.0 }
-            },
-            {
-              name: 'c4',
-              vars: [
-                { name: 'x3', coef: 1.0 },
-                { name: 'x4', coef: 1.0 }
-              ],
-              bnds: { type: glpk.GLP_LO, ub: 0.0, lb: 0.5 }
-            }
-          ],
-          binaries: ['x3', 'x4']
+          subjectTo: targetObjVars()
         }
-        logs(JSON.stringify(glpk.solve(lp, glpk.GLP_MSG_ALL)))
+        console.log(lp)
+        let rst = glpk.solve(lp, glpk.GLP_MSG_ALL)
+        // result output
+
+        let rstmsg = '结果：'
+        if (rst.result.status === 5) {
+          rstmsg += '\n成本为' + rst.result.z
+          for (let v in rst.result.vars) {
+            rstmsg += '\n' + v + ' : ' + rst.result.vars[v]
+          }
+        } else {
+          rstmsg += '无解'
+        }
+        Vue.$store.commit('_SET_RST', rstmsg)
       })
-      /// returns
-      return _pass
     }
     Vue.prototype.$finetrim = s => s.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/)
   }

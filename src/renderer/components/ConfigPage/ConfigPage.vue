@@ -30,7 +30,7 @@ export default {
     },
     'updateTarget': function (e) {
       this.$forceUpdate()
-      let ip = this.$finetrim(this.d_target)
+      let ip = this.$finetrim(this.d_target).map(e => parseFloat(e))
       if (ip.length === this.typeN * 2) {
         console.log('update Target')
         let tar = []
@@ -43,6 +43,7 @@ export default {
   },
   mounted () {
     this.tn = this.typeN
+    this.d_target = this.$store.state.Mines.target.map(e => e.join(' ')).join('  ')
   }
 }
 </script>

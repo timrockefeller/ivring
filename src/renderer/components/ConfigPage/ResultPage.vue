@@ -11,9 +11,7 @@
 <script>
 export default {
   data () {
-    return {
-
-    }
+    return {}
   },
   computed: {
     rsl () { return this.$store.state.Mines.rsl },
@@ -21,13 +19,9 @@ export default {
   },
   methods: {
     a_generate: function () {
-      this.$store.commit('_SET_RST', this.$LPMain(this.$store.state.Mines))
-      this.$forceUpdate()
-      console.log('[Generator] ' + this.$store.state.Mines.rsl)
+      this.$LPMain(this.$store.state.Mines, this)
     },
-    a_export: function () {
-
-    }
+    a_export: () => {}
   }
 }
 </script>

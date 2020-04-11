@@ -2,7 +2,8 @@
   <div class="rc-list" ref="warpper" v-scrollBar>
           <mine-info v-for="(mine,idex) in mines" :key="idex" :info="mine" :typeN="typeN" v-on:deleteMine="deleteHandle(idex)"> </mine-info>
       <mine-add @addMine="addMine" :typeN="typeN"></mine-add>
-      <a @click="printMine">debug</a>
+      <a @click="printMine">debug_Print</a>
+      <a @click="debugCase">debug_Case></a>
   </div>
 </template>
 
@@ -47,6 +48,9 @@ export default {
     },
     'printMine': function () {
       console.log(JSON.stringify(this.state))
+    },
+    'debugCase': function () {
+      for (let s of Mine.test) { this.$store.commit('_ADD_MINE', new Mine.NewParse(s)) }
     }
   }
 }
