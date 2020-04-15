@@ -28,6 +28,10 @@
 - UI
 - 跨平台(网页甚好 但要不要提供可供Linux运行的bash呢)
 
+#### Preview
+
+![1586911442526](./assets/1586911442526.png)
+
 #### Build Setup
 
 
