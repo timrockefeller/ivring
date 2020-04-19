@@ -34,6 +34,14 @@
 
 #### Build Setup
 
+安装node-glpk时所需前置依赖（需要admin权限）：
+
+``` bash
+npm install -g node-gyp
+npm install --global --production windows-build-tools
+```
+
+*此处需考虑平台问题*
 
 ``` bash
 echo "Please run it in root user."
