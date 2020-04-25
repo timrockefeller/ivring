@@ -1,0 +1,1 @@
+export const DISP_SWITCH_UNIT = 'DISP_SWITCH_UNIT'

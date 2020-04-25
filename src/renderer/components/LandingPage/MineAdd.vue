@@ -8,7 +8,7 @@
         </div>
         <div class="mineadd-item">
         <span class="mineadd-item-name">价格：</span>
-        <input @input="check" v-model.trim="Mprice" type="text" name="mine_price" class="mineadd-item-value" placeholder="rmb/g">
+        <input @input="check" v-model.number="Mprice" type="text" name="mine_price" class="mineadd-item-value" placeholder="万元/t">
         </div>
         <div class="mineadd-item">
         <span class="mineadd-item-name">成分：</span>

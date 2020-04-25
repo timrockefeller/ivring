@@ -78,11 +78,11 @@ export default {
 
         let rstmsg = '结果：'
         if (rst.result.status === 5) {
-          rstmsg += '\n成本为' + rst.result.z.toFixed(2)
+          rstmsg += '\n成本为' + rst.result.z.toFixed(2) + '万元'
           rstmsg += '\n========\n参考配比'
           for (let v in rst.result.vars) {
             if (rst.result.vars[v] !== 0) {
-              rstmsg += '\n' + v + ' : ' + rst.result.vars[v].toFixed(2)
+              rstmsg += '\n' + v + ' : ' + rst.result.vars[v].toFixed(2) + 't'
             }
           }
         } else {

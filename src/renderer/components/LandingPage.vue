@@ -8,7 +8,7 @@
     <main>
       <div class="left-side">
         <span class="title">
-            Resources
+          Resources
         </span>
         <resource-list :typeN="typeN"></resource-list>
       </div>
@@ -16,12 +16,21 @@
         <div class="doc">
           <div class="title">Configrations</div>
           <config-page :typeN="typeN"></config-page>
-          </div>
+        </div>
         <div class="doc">
           <div class="title alt">Result</div>
-            <result-page></result-page>
+          <result-page></result-page>
         </div>
       </div>
+
+      <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="矿物配置" name="first">
+          
+        </el-tab-pane>
+        <el-tab-pane label="约束定义" name="second">配置管理</el-tab-pane>
+        <el-tab-pane label="计算" name="third">角色管理</el-tab-pane>
+        <el-tab-pane label="Options" name="fourth">定时任务补偿</el-tab-pane>
+      </el-tabs> -->
     </main>
   </div>
 </template>
@@ -73,7 +82,7 @@
     width: 100vw;
   }
     #banner {
-padding: 2.5vh 0;
+padding: 1vh 0;
     }
   #logo {
     height: auto;
@@ -111,27 +120,4 @@ padding: 2.5vh 0;
     margin: 10px 0 10px 0;
   }
 
-  .doc p {
-    color: black;
-    margin-bottom: 10px;
-  }
-
-  .doc button {
-    font-size: .8em;
-    cursor: pointer;
-    outline: none;
-    padding: 0.75em 2em;
-    border-radius: 2em;
-    display: inline-block;
-    color: #fff;
-    background-color: #4fc08d;
-    transition: all 0.15s ease;
-    box-sizing: border-box;
-    border: 1px solid #4fc08d;
-  }
-
-  .doc button.alt {
-    color: #42b983;
-    background-color: transparent;
-  }
 </style>

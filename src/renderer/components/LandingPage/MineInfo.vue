@@ -2,7 +2,7 @@
     <div class="mineinfo">
         <h4 class="mineinfo-name" title="名称"> {{info.name}}</h4>
 
-        <span class="mineinfo-price" title="价格">{{info.price}}</span>
+        <span :class="'mineinfo-price' + (isTenThPerTon?'':' mineinfo-price-ypg')" title="价格">{{modifiedPrice}}</span>
         <span class="mineinfo-delete" title="删除" @click="$emit('deleteMine')"></span>
         <div class="mineinfo-elements">
             <div class="ct-block" v-for="(item,idx) in _element" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote" :title="item"></div>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 let colorset_ = ['c23531', '2f4554', '61a0a8', 'd48265', '91c7ae', '749f83', 'ca8622', 'bda29a', '6e7074', '546570', 'c4ccd3']
 
 export default {
@@ -20,8 +21,14 @@ export default {
   },
   props: ['info', 'typeN'],
   computed: {
+    ...mapState({
+      isTenThPerTon: state => state.Config.isTenThPerTon
+    }),
     _element () {
       return this.info.elements.filter((e, i) => i < this.typeN)
+    },
+    modifiedPrice () {
+      return this.isTenThPerTon ? this.info.price : this.info.price / 10
     }
   },
   methods: {
@@ -81,9 +88,15 @@ border:solid rgba(255,255,255,0) 1px;
 }
 
 .mineinfo-price::after {
+    content: "万元/t";
+    font-size: 0.7em;
+}
+
+.mineinfo-price-ypg::after {
     content: "￥/克";
     font-size: 0.7em;
 }
+
 .mineinfo-elements{
     display: block;
     margin: 10px 0 0 0;
