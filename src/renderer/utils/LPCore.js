@@ -78,9 +78,12 @@ export default {
 
         let rstmsg = '结果：'
         if (rst.result.status === 5) {
-          rstmsg += '\n成本为' + rst.result.z
+          rstmsg += '\n成本为' + rst.result.z.toFixed(2)
+          rstmsg += '\n========\n参考配比'
           for (let v in rst.result.vars) {
-            rstmsg += '\n' + v + ' : ' + rst.result.vars[v]
+            if (rst.result.vars[v] !== 0) {
+              rstmsg += '\n' + v + ' : ' + rst.result.vars[v].toFixed(2)
+            }
           }
         } else {
           rstmsg += '无解'
