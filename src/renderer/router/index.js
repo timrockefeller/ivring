@@ -11,6 +11,11 @@ export default new Router({
       component: require('@/components/LandingPage').default
     },
     {
+      path: '/setting',
+      name: 'setting-page',
+      component: require('@/components/SettingPage').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

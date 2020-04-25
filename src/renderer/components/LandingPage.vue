@@ -2,8 +2,13 @@
   <div id="wrapper">
     <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue">-->
     <div id="banner">
+      <div class="banner-split banner-title">
         <h1>Ivring</h1>
         <span>金属矿物构成最优分析</span>
+      </div>
+      <div class="banner-split banner-button">
+        <i class="el-icon-s-tools" @click="open('/setting')"></i>
+      </div>
     </div>
     <main>
       <div class="left-side">
@@ -53,7 +58,7 @@
     components: {SystemInformation, ResourceList, ConfigPage, ResultPage},
     methods: {
       open (link) {
-        this.$electron.shell.openExternal(link)
+        this.$router.push(link)
       }
     }
   }
@@ -83,6 +88,16 @@
   }
     #banner {
 padding: 1vh 0;
+    }
+    .banner-split{
+      display: inline-block;
+    }
+    .banner-button{
+      text-align: right;
+      margin-right: 0;
+      font-size: 2em;
+      color:#555;
+      float:right;
     }
   #logo {
     height: auto;
