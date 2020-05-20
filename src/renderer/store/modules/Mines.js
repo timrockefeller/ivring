@@ -15,7 +15,7 @@ const state = {
       elements: [4, 1, 15, 7, 2, 4]
     }
   ],
-  target: [],
+  target: [[0, 1], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1]],
   rsl: ''
 }
 
@@ -29,6 +29,24 @@ const mutations = {
   },
   _SET_TYPEN (state, n) {
     state.typeN = n
+  },
+  _SET_ELE_NAME (state, idx, name) {
+    while (idx >= state.elename.length) {
+      state.elename.push('Ele' + state.elename.length)
+    }
+    state.elename[idx] = name
+  },
+  _SET_ELE_TAR_LOW (state, { n, e }) {
+    while (n >= state.target.length) {
+      state.target.push([0, 1])
+    }
+    state.target[n][0] = e
+  },
+  _SET_ELE_TAR_HIGH (state, {n, e}) {
+    while (n >= state.target.length) {
+      state.target.push([0, 1])
+    }
+    state.target[n][1] = e
   },
   _SET_TARGET (state, tar) {
     state.target = tar

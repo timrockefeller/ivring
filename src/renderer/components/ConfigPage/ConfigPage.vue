@@ -1,17 +1,28 @@
 <template>
 <div>
-    <p>共<el-input-number size="mini" v-model="tn" @change="updateTypeN" :min="4" :max="10" label="çŸ¿ç‰©ç§�ç±»"></el-input-number>种元素，请依次输入每种元素的区间，用空格分开（如"1.0 1.2 1.0 1.3 ...")，共{{typeN*2}}个数字。</p>       
-    
-    <el-input type="textarea" v-model="d_target" :placeholder="elementholder" @input="updateTarget($event)"></el-input>
+    <el-input-number size="mini" v-model="tn" @change="updateTypeN" :min="4" :max="10" label="元素个数"></el-input-number>       
+    各元素需求范围：
+    <div class="el-list" ref="el_warpper" v-scrollBar>
+    <el-row v-for="idx in tn" :key="idx">
+        <el-col :span="5">{{elename(idx-1)}}</el-col>
+        <ConfigInputEle :idx="idx-1"></ConfigInputEle>
+    </el-row>
+    <a @click="cleanTarget">debug_clean</a>
+    </div>
+    <!-- <el-input type="textarea" v-model="d_target" :placeholder="elementholder" @input="updateTarget($event)"></el-input> -->
 </div>
 </template>
 
 <script>
+import ConfigInputEle from './ConfigInputEle'
+
 export default {
+  components: {ConfigInputEle},
   data () {
     return {
       tn: 6,
       d_target: ''
+
     }
   },
   props: ['typeN'],
@@ -39,6 +50,21 @@ export default {
         }
         this.$store.commit('_SET_TARGET', tar)
       }
+    },
+    cleanTarget () {
+      this.$store.commit('_SET_TARGET', [])
+    },
+    elename (n) {
+      return this.$store.state.Mines.elename[n]
+    },
+
+    update_target (p, n, e) {
+      if (p === 0) {
+        this.$store.commit('_SET_ELE_TAR_LOW', {n, e})
+      }
+      if (p === 1) {
+        this.$store.commit('_SET_ELE_TAR_HIGH', {n, e})
+      }
     }
   },
   mounted () {
@@ -48,9 +74,23 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-input-number{
-    width:120px
-
+    width:100px
+}
+.el-input--mini{
+    height: 20px;
+}
+.el-input__inner{
+    height: 20px;
+}
+.el-input-number__decrease{
+    width:20px;
+}
+.el-list{
+    padding:2vh 0;
+    max-height: 27vh;
+    position: relative;
+    overflow: hidden;
 }
 </style>
