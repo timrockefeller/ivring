@@ -30,7 +30,9 @@ const mutations = {
   _SET_TYPEN (state, n) {
     state.typeN = n
   },
-  _SET_ELE_NAME (state, idx, name) {
+  _SET_ELE_NAME (state, { idx, name }) {
+    console.log(state.elename)
+
     while (idx >= state.elename.length) {
       state.elename.push('Ele' + state.elename.length)
     }

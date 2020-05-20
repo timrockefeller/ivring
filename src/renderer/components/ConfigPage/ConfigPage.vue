@@ -4,7 +4,7 @@
     各元素需求范围：
     <div class="el-list" ref="el_warpper" v-scrollBar>
     <el-row v-for="idx in tn" :key="idx">
-        <el-col :span="5">{{elename(idx-1)}}</el-col>
+        
         <ConfigInputEle :idx="idx-1"></ConfigInputEle>
     </el-row>
     <a @click="cleanTarget">debug_clean</a>
