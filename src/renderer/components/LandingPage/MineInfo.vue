@@ -34,12 +34,33 @@ export default {
   methods: {
     'sum': function () {
       let i = 0
-      for (let c in this.info.elements) { i += c < this.typeN ? this.info.elements[c] : 0 }
+      for (let c in this.info.elements) {
+        let r = (c < this.typeN &&
+         c > 0) // 非生铁部分
+          ? this.info.elements[c] : 0
+        i += r
+      }
+      return i
+    },
+    'fittedsum': function () {
+      let mi = this.sum() * 0.05
+      let i = 0
+      for (let c in this.info.elements) {
+        let r = (c < this.typeN &&
+         c > 0) // 非生铁部分
+          ? this.info.elements[c] : 0
+        i += Math.max(r, mi)
+      }
       return i
     },
     'parseColor': function (idx, item) {
-      return 'background:#' + colorset_[idx] +
-       ';width:' + (item / this.sum() * 100) + '%;' +
+      let color = colorset_[idx]
+      let width = '40'
+      if (idx !== 0) {
+        width = (Math.max(item, this.sum() * 0.05) / this.fittedsum() * 60)
+      }
+      return 'background:#' + color +
+       ';width:' + width + '%;' +
         (idx >= this.typeN ? 'visibility: hidden;' : '')
     },
     'shownote': function () {
@@ -103,7 +124,7 @@ border:solid rgba(255,255,255,0) 1px;
 }
 .ct-block{
     display: inline-block;
-    padding: 2px;
+    /* padding: 2px; */
     height: 20px;
     background: #444;
     opacity: 0.7;
