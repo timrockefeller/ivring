@@ -9,13 +9,15 @@
 <script>
 // get_target(0,idx-1)
 export default {
-  data () { return {tarlow: 0, tarhigh: 0} },
+  data () { return {tarlow: 0.1, tarhigh: 1} },
   props: ['idx'],
   computed: {
 
     elename: {
       get () {
-        return this.$store.state.Mines.elename[this.idx]
+        let elename = this.$store.state.Mines.elename
+        console.log(elename)
+        return elename[this.idx]
       },
       set (name) {
         this.$store.commit('_SET_ELE_NAME', {idx: this.idx, name})

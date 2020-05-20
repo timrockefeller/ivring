@@ -5,7 +5,7 @@
         <span :class="'mineinfo-price' + (isTenThPerTon?'':' mineinfo-price-ypg')" title="价格">{{modifiedPrice}}</span>
         <span class="mineinfo-delete" title="删除" @click="$emit('deleteMine')"></span>
         <div class="mineinfo-elements">
-            <div class="ct-block" v-for="(item,idx) in _element" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote" :title="item"></div>
+            <div class="ct-block" v-for="(item,idx) in _element" :key="idx" :style="parseColor(idx,item)" @mouseover="shownote" @mouseout="hidenote" :title="eletitle(idx)+':'+item"></div>
         </div>
     </div>
 </template>
@@ -22,7 +22,8 @@ export default {
   props: ['info', 'typeN'],
   computed: {
     ...mapState({
-      isTenThPerTon: state => state.Config.isTenThPerTon
+      isTenThPerTon: state => state.Config.isTenThPerTon,
+      elename: state => state.Mines.elename
     }),
     _element () {
       return this.info.elements.filter((e, i) => i < this.typeN)
@@ -35,10 +36,9 @@ export default {
     'sum': function () {
       let i = 0
       for (let c in this.info.elements) {
-        let r = (c < this.typeN &&
+        i += (c < this.typeN &&
          c > 0) // 非生铁部分
           ? this.info.elements[c] : 0
-        i += r
       }
       return i
     },
@@ -68,6 +68,9 @@ export default {
     },
     'hidenote': function () {
 
+    },
+    eletitle (idx) {
+      return this.elename[idx]
     }
   }
 }

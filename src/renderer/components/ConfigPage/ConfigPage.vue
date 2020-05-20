@@ -8,9 +8,15 @@
         <ConfigInputEle :idx="idx-1"></ConfigInputEle>
     </el-row>
     <a @click="cleanTarget">debug_clean</a>
+    <!-- <el-collapse v-model="activeNames" @change="handleChange">
+        <el-collapse-item class ="background-none" title="快速表单" name="1">
+            <el-input type="textarea" v-model="d_target" :placeholder="elementholder" @input="updateTarget($event)"></el-input>
+            <span style="color:red" v-if="!isValid">格式错误</span>
+        </el-collapse-item>
+    </el-collapse> -->
     </div>
-    <!-- <el-input type="textarea" v-model="d_target" :placeholder="elementholder" @input="updateTarget($event)"></el-input> -->
-</div>
+    
+    </div>
 </template>
 
 <script>
@@ -52,10 +58,9 @@ export default {
       }
     },
     cleanTarget () {
-      this.$store.commit('_SET_TARGET', [])
-    },
-    elename (n) {
-      return this.$store.state.Mines.elename[n]
+      let rc = []
+      for (let i = 0; i < this.typeN; i++) { rc.push([0.1, 1]) }
+      this.$store.commit('_SET_TARGET', rc)
     },
 
     update_target (p, n, e) {
@@ -92,5 +97,13 @@ export default {
     max-height: 27vh;
     position: relative;
     overflow: hidden;
+    white-space:nowrap;
+}
+.el-collapse-item__header.is-active{
+    background: none;
+}
+.background-none{
+    border:none;
+    background: none;
 }
 </style>

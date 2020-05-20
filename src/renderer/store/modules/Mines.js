@@ -1,8 +1,7 @@
 const state = {
   typeN: 6,
   // TODO: fill up more element names
-  elename: ['Fe2O3', 'Al2O3', 'SiO2', 'S', 'C', 'MgO2',
-    'Ele7', 'Ele8', 'Ele9', 'Ele10'],
+  elename: ['Fe2O3', 'Al2O3', 'SiO2', 'S', 'C', 'MgO2'],
   mines: [
     {
       name: 'Curus-19',
@@ -25,18 +24,16 @@ const mutations = {
   },
   _DELETE_MINE (state, idx) {
     state.mines = state.mines.filter((n, i) => i !== idx)
-    console.log('delete ' + idx)
   },
   _SET_TYPEN (state, n) {
     state.typeN = n
   },
   _SET_ELE_NAME (state, { idx, name }) {
-    console.log(state.elename)
-
     while (idx >= state.elename.length) {
       state.elename.push('Ele' + state.elename.length)
     }
     state.elename[idx] = name
+    console.log(state.elename)
   },
   _SET_ELE_TAR_LOW (state, { n, e }) {
     while (n >= state.target.length) {
