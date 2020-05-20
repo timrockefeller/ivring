@@ -7,8 +7,9 @@
         <span>金属矿物构成最优分析</span>
       </div>
       <div class="banner-split banner-button">
-        <i class="el-icon-s-tools" @click="open('/setting')"></i>
+        <i class="setting-button el-icon-s-tools" @click="open('/setting')"></i>
       </div>
+      
     </div>
     <main>
       <div class="left-side">
@@ -134,5 +135,12 @@ padding: 1vh 0;
     font-size: 18px;
     margin: 10px 0 10px 0;
   }
-
+  .setting-button{
+      opacity: 0.8;
+      transition: 0.2s ease;
+  }
+  .setting-button:hover{
+      opacity: 1;
+      transform:rotate(180deg);
+  }
 </style>
